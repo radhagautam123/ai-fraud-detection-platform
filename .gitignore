@@ -42,3 +42,14 @@ Thumbs.db
 # Temporary Files
 *.tmp
 *.temp
+
+# Processed datasets
+data/processed/*.csv
+
+# Kaggle dataset
+data/raw/*.csv
+data/raw/__MACOSX/
+
+# Trained models
+models/*.pkl
+models/*.joblib

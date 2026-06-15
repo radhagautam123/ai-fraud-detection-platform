@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+venv/
+.venv/
+env/
+
+# VS Code
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment Variables
+.env
+
+# Logs
+*.log
+
+# Model Files (can be regenerated)
+models/*.pkl
+models/*.joblib
+
+# Kaggle Dataset (large file)
+data/raw/*.csv
+
+# Generated Reports and Figures
+reports/figures/*.png
+reports/figures/*.jpg
+reports/figures/*.jpeg
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Docker
+*.pid
+
+# Temporary Files
+*.tmp
+*.temp

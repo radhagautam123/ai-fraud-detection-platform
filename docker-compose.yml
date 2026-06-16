@@ -1,43 +1,29 @@
-version: '3.7'
-
 services:
-  # Redpanda: Lightweight single-node broker
   redpanda:
-    image: docker.redpanda.com/redpandadata/redpanda:v23.2.1
+    image: redpandadata/redpanda:latest
     container_name: redpanda-broker
     command:
-      - redpanda start
-      - --smp 1
-      - --memory 512M
+      - redpanda
+      - start
       - --overprovisioned
-      - --kafka-addr PLAINTEXT://0.0.0.0:29092,OUTSIDE://0.0.0.0:9092
-      - --advertise-kafka-addr PLAINTEXT://redpanda:29092,OUTSIDE://localhost:9092
-      - --pandaproxy-addr 0.0.0.0:28082
-      - --advertise-pandaproxy-addr localhost:28082
+      - --smp
+      - "1"
+      - --memory
+      - "512M"
+      - --reserve-memory
+      - "0M"
+      - --node-id
+      - "0"
+      - --check=false
+      - --kafka-addr
+      - PLAINTEXT://0.0.0.0:9092
+      - --advertise-kafka-addr
+      - PLAINTEXT://localhost:9092
     ports:
       - "9092:9092"
-      - "28082:28082"
     volumes:
-      - redpanda_data:/var/lib/redpanda
-    healthcheck:
-      test: ["CMD", "rpk", "cluster", "info"]
-      interval: 5s
-      timeout: 3s
-      retries: 5
+      - redpanda_data:/var/lib/redpanda/data
 
-  # Redpanda Console: Web UI for topic inspection
-  redpanda-console:
-    image: docker.redpanda.com/redpandadata/console:v23.2.1
-    container_name: redpanda-console
-    entrypoint: /bin/sh
-    command: -c "echo \"kafka:\" > /tmp/config.yml && echo \"  brokers:\" >> /tmp/config.yml && echo \"    - redpanda:29092\" >> /tmp/config.yml && /app/console --config.filepath=/tmp/config.yml"
-    ports:
-      - "8080:8080"
-    depends_on:
-      redpanda:
-        condition: service_healthy
-
-  # PostgreSQL Database
   postgres:
     image: postgres:15-alpine
     container_name: fraud-postgres
@@ -49,11 +35,6 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d fraud_db"]
-      interval: 5s
-      timeout: 3s
-      retries: 5
 
 volumes:
   redpanda_data:

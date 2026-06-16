@@ -20,36 +20,46 @@ env/
 # Logs
 *.log
 
-# Model Files (can be regenerated)
-models/*.pkl
-models/*.joblib
-
-# Kaggle Dataset (large file)
-data/raw/*.csv
-
-# Generated Reports and Figures
-reports/figures/*.png
-reports/figures/*.jpg
-reports/figures/*.jpeg
-
 # OS Files
 .DS_Store
 Thumbs.db
-
-# Docker
-*.pid
 
 # Temporary Files
 *.tmp
 *.temp
 
-# Processed datasets
-data/processed/*.csv
+# Docker
+*.pid
 
-# Kaggle dataset
+# =========================
+# DATASETS
+# =========================
 data/raw/*.csv
 data/raw/__MACOSX/
 
-# Trained models
+# Processed datasets
+data/processed/*.csv
+
+# =========================
+# MODELS
+# =========================
 models/*.pkl
 models/*.joblib
+
+# =========================
+# GENERATED REPORTS
+# =========================
+reports/figures/*.png
+reports/figures/*.jpg
+reports/figures/*.jpeg
+
+# React / Node
+node_modules/
+frontend/node_modules/
+frontend/dist/
+dist/
+build/
+
+# React environment files
+frontend/.env
+frontend/.env.local
